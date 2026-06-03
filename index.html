@@ -1,0 +1,72 @@
+<!DOCTYPE html> <!-- Defines this file as an HTML document -->
+<html lang="es"> <!-- Sets the page language to Spanish -->
+<head> <!-- Starts the page settings -->
+  <meta charset="UTF-8"> <!-- Allows accents and Spanish characters -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Makes the page work on phones -->
+  <title>Calculadora en Soles | Peruanos Sin Fronteras</title> <!-- Sets the browser tab title -->
+  <style> /* Starts the CSS styles */
+    body { font-family: Arial, sans-serif; background: #f7f3ff; margin: 0; padding: 20px; color: #222; } /* Styles the full page */
+    .box { max-width: 520px; margin: auto; background: white; padding: 24px; border-radius: 16px; box-shadow: 0 4px 14px rgba(0,0,0,0.10); } /* Styles the main card */
+    h1 { color: #5b2bbf; font-size: 26px; margin-bottom: 8px; } /* Styles the main title */
+    h2 { color: #d63384; font-size: 18px; margin-top: 24px; } /* Styles section titles */
+    p { line-height: 1.5; } /* Makes paragraphs easier to read */
+    label { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid #eee; } /* Styles each option row */
+    input[type="number"] { width: 70px; padding: 6px; font-size: 16px; } /* Styles number boxes */
+    .total { background: #f2ecff; padding: 16px; border-radius: 12px; margin-top: 20px; font-size: 20px; font-weight: bold; } /* Styles the total box */
+    .small { font-size: 14px; color: #555; } /* Styles smaller helper text */
+    .pay { background: #fff8e8; padding: 14px; border-radius: 12px; margin-top: 16px; } /* Styles payment info box */
+    a { color: #5b2bbf; font-weight: bold; } /* Styles links */
+  </style> <!-- Ends the CSS styles -->
+</head> <!-- Ends the page settings -->
+<body> <!-- Starts the visible page -->
+  <div class="box"> <!-- Starts the main card -->
+    <h1>💜 Calculadora en Soles</h1> <!-- Shows the page title -->
+    <p>Selecciona cuántas charlas o talleres quieres agregar. Esta calculadora es para pagos por <strong>Yape o BCP</strong>, sin comisión.</p> <!-- Explains the calculator -->
+
+    <h2>Charlas regulares</h2> <!-- Shows regular section title -->
+    <label> <!-- Starts regular masterclasses row -->
+      <span>Charlas regulares — S/10 c/u</span> <!-- Shows regular masterclasses price -->
+      <input type="number" id="regular" value="0" min="0" onchange="calcular()"> <!-- Lets user choose quantity -->
+    </label> <!-- Ends regular masterclasses row -->
+
+    <h2>Eventos especiales</h2> <!-- Shows special events title -->
+    <label> <!-- Starts 360 masterclass row -->
+      <span>Masterclass 360°: De Perú a Brasil + Python desde cero — S/25</span> <!-- Shows 360 masterclass price -->
+      <input type="checkbox" id="brasilPython" onchange="calcular()"> <!-- Lets user select this event -->
+    </label> <!-- Ends 360 masterclass row -->
+
+    <label> <!-- Starts virtual workshop row -->
+      <span>Taller virtual: CV, becas, storytelling y emails fríos — S/20</span> <!-- Shows virtual workshop price -->
+      <input type="checkbox" id="tallerVirtual" onchange="calcular()"> <!-- Lets user select this event -->
+    </label> <!-- Ends virtual workshop row -->
+
+    <label> <!-- Starts in-person workshop row -->
+      <span>Taller presencial: CV, becas, storytelling y networking — S/30</span> <!-- Shows in-person workshop price -->
+      <input type="checkbox" id="tallerPresencial" onchange="calcular()"> <!-- Lets user select this event -->
+    </label> <!-- Ends in-person workshop row -->
+
+    <div class="total" id="resultado">Total a pagar: S/0</div> <!-- Shows the calculated total -->
+
+    <div class="pay"> <!-- Starts payment instructions box -->
+      <p><strong>Opciones de pago sin comisión:</strong></p> <!-- Shows payment title -->
+      <p>💗 <strong>Yape:</strong> 973 150 633</p> <!-- Shows Yape number -->
+      <p>💙 <strong>BCP:</strong><br>Soles: 19116756510066<br>CCI: 0021911675651006652</p> <!-- Shows BCP details -->
+      <p class="small">Luego de pagar, vuelve al formulario y sube tu comprobante.</p> <!-- Gives next step -->
+    </div> <!-- Ends payment instructions box -->
+
+    <p class="small">¿Pagarás por GoFundMe o en dólares? Usa la <a href="gofundme.html">calculadora en dólares</a>.</p> <!-- Links to USD calculator -->
+  </div> <!-- Ends the main card -->
+
+  <script> // Starts the JavaScript logic
+    function calcular() { // Creates the function that calculates the total
+      let regular = Number(document.getElementById("regular").value) || 0; // Gets the number of regular masterclasses
+      let total = regular * 10; // Adds regular masterclasses price
+      if (document.getElementById("brasilPython").checked) total += 25; // Adds 360 masterclass price if selected
+      if (document.getElementById("tallerVirtual").checked) total += 20; // Adds virtual workshop price if selected
+      if (document.getElementById("tallerPresencial").checked) total += 30; // Adds in-person workshop price if selected
+      document.getElementById("resultado").innerText = "Total a pagar: S/" + total.toFixed(2); // Shows the final total
+    } // Ends the function
+    calcular(); // Runs the calculator when the page loads
+  </script> <!-- Ends the JavaScript logic -->
+</body> <!-- Ends the visible page -->
+</html> <!-- Ends the HTML document -->
