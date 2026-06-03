@@ -1,0 +1,82 @@
+<!DOCTYPE html> <!-- Defines this file as an HTML document -->
+<html lang="es"> <!-- Sets the page language to Spanish -->
+<head> <!-- Starts the page settings -->
+  <meta charset="UTF-8"> <!-- Allows accents and Spanish characters -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Makes the page work on phones -->
+  <title>Calculadora GoFundMe | Peruanos Sin Fronteras</title> <!-- Sets the browser tab title -->
+  <style> /* Starts the CSS styles */
+    body { font-family: Arial, sans-serif; background: #f0fff7; margin: 0; padding: 20px; color: #222; } /* Styles the full page */
+    .box { max-width: 520px; margin: auto; background: white; padding: 24px; border-radius: 16px; box-shadow: 0 4px 14px rgba(0,0,0,0.10); } /* Styles the main card */
+    h1 { color: #008f5a; font-size: 26px; margin-bottom: 8px; } /* Styles the main title */
+    h2 { color: #d63384; font-size: 18px; margin-top: 24px; } /* Styles section titles */
+    p { line-height: 1.5; } /* Makes paragraphs easier to read */
+    label { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid #eee; } /* Styles each option row */
+    input[type="number"] { width: 70px; padding: 6px; font-size: 16px; } /* Styles number boxes */
+    .total { background: #eefbf4; padding: 16px; border-radius: 12px; margin-top: 20px; font-size: 18px; } /* Styles the total box */
+    .big { font-size: 24px; font-weight: bold; color: #b53b16; } /* Styles the final total */
+    .small { font-size: 14px; color: #555; } /* Styles smaller helper text */
+    .pay { background: #fff8e8; padding: 14px; border-radius: 12px; margin-top: 16px; } /* Styles payment info box */
+    a { color: #008f5a; font-weight: bold; } /* Styles links */
+  </style> <!-- Ends the CSS styles -->
+</head> <!-- Ends the page settings -->
+<body> <!-- Starts the visible page -->
+  <div class="box"> <!-- Starts the main card -->
+    <h1>💚 Calculadora GoFundMe</h1> <!-- Shows the page title -->
+    <p>Selecciona tus eventos. Esta calculadora suma la comisión aproximada de GoFundMe: <strong>2.9% + $0.30</strong>.</p> <!-- Explains the calculator -->
+
+    <h2>Charlas regulares</h2> <!-- Shows regular section title -->
+    <label> <!-- Starts regular masterclasses row -->
+      <span>Charlas regulares — $4 c/u</span> <!-- Shows regular masterclasses price -->
+      <input type="number" id="regular" value="0" min="0" onchange="calcular()"> <!-- Lets user choose quantity -->
+    </label> <!-- Ends regular masterclasses row -->
+
+    <h2>Eventos especiales</h2> <!-- Shows special events title -->
+    <label> <!-- Starts 360 masterclass row -->
+      <span>Masterclass 360°: De Perú a Brasil + Python desde cero — $7</span> <!-- Shows 360 masterclass price -->
+      <input type="checkbox" id="brasilPython" onchange="calcular()"> <!-- Lets user select this event -->
+    </label> <!-- Ends 360 masterclass row -->
+
+    <label> <!-- Starts virtual workshop row -->
+      <span>Taller virtual: CV, becas, storytelling y emails fríos — $7</span> <!-- Shows virtual workshop price -->
+      <input type="checkbox" id="tallerVirtual" onchange="calcular()"> <!-- Lets user select this event -->
+    </label> <!-- Ends virtual workshop row -->
+
+    <label> <!-- Starts in-person workshop row -->
+      <span>Taller presencial: CV, becas, storytelling y networking — $10</span> <!-- Shows in-person workshop price -->
+      <input type="checkbox" id="tallerPresencial" onchange="calcular()"> <!-- Lets user select this event -->
+    </label> <!-- Ends in-person workshop row -->
+
+    <div class="total"> <!-- Starts result box -->
+      <p>Subtotal: <strong id="subtotal">$0.00</strong></p> <!-- Shows subtotal -->
+      <p>Comisión GoFundMe: <strong id="comision">$0.00</strong></p> <!-- Shows fee -->
+      <p>Total a transferir:</p> <!-- Shows final total label -->
+      <p class="big" id="resultado">$0.00</p> <!-- Shows final total -->
+      <p class="small">Transfiere exactamente este monto para que tu aporte llegue completo al programa.</p> <!-- Gives clear instruction -->
+    </div> <!-- Ends result box -->
+
+    <div class="pay"> <!-- Starts payment instructions box -->
+      <p><strong>Pago por GoFundMe:</strong></p> <!-- Shows payment title -->
+      <p>💚 Link: <a href="https://gofund.me/fafa69d23" target="_blank">https://gofund.me/fafa69d23</a></p> <!-- Shows GoFundMe link -->
+      <p class="small">Luego de pagar, vuelve al formulario y sube tu comprobante.</p> <!-- Gives next step -->
+    </div> <!-- Ends payment instructions box -->
+
+    <p class="small">¿Pagarás por Yape o BCP? Usa la <a href="index.html">calculadora en soles</a>.</p> <!-- Links to soles calculator -->
+  </div> <!-- Ends the main card -->
+
+  <script> // Starts the JavaScript logic
+    function calcular() { // Creates the function that calculates the total
+      let regular = Number(document.getElementById("regular").value) || 0; // Gets the number of regular masterclasses
+      let subtotal = regular * 4; // Adds regular masterclasses price
+      if (document.getElementById("brasilPython").checked) subtotal += 7; // Adds 360 masterclass price if selected
+      if (document.getElementById("tallerVirtual").checked) subtotal += 7; // Adds virtual workshop price if selected
+      if (document.getElementById("tallerPresencial").checked) subtotal += 10; // Adds in-person workshop price if selected
+      let comision = subtotal > 0 ? (subtotal * 0.029) + 0.30 : 0; // Calculates the GoFundMe fee
+      let total = subtotal + comision; // Adds subtotal and fee
+      document.getElementById("subtotal").innerText = "$" + subtotal.toFixed(2); // Shows subtotal
+      document.getElementById("comision").innerText = "$" + comision.toFixed(2); // Shows fee
+      document.getElementById("resultado").innerText = "$" + total.toFixed(2); // Shows final total
+    } // Ends the function
+    calcular(); // Runs the calculator when the page loads
+  </script> <!-- Ends the JavaScript logic -->
+</body> <!-- Ends the visible page -->
+</html> <!-- Ends the HTML document -->
