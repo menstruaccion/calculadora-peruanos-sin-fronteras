@@ -1,0 +1,91 @@
+<!DOCTYPE html> <!-- Defines this document as HTML -->
+<html lang="es"> <!-- Sets the language to Spanish -->
+<head> <!-- Starts the page settings -->
+  <meta charset="UTF-8"> <!-- Allows Spanish accents and symbols -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Makes the page phone-friendly -->
+  <title>Pago internacional | Peruanos Sin Fronteras</title> <!-- Sets the browser tab title -->
+  <style> /* Starts the page styles */
+    body { font-family: Arial, sans-serif; background: #f0fff7; margin: 0; padding: 20px; color: #222; } /* Styles the full page */
+    .box { max-width: 560px; margin: auto; background: white; padding: 24px; border-radius: 16px; box-shadow: 0 4px 14px rgba(0,0,0,0.10); } /* Styles the main card */
+    h1 { color: #008f5a; font-size: 26px; margin-bottom: 8px; } /* Styles the main title */
+    h2 { color: #d63384; font-size: 18px; margin-top: 24px; } /* Styles section titles */
+    p { line-height: 1.5; } /* Makes paragraphs readable */
+    label { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid #eee; } /* Styles each option row */
+    input[type="number"] { width: 75px; padding: 7px; font-size: 16px; } /* Styles number inputs */
+    input[type="checkbox"] { width: 20px; height: 20px; } /* Styles checkboxes */
+    select { padding: 8px; font-size: 16px; border-radius: 8px; } /* Styles the currency selector */
+    .total { background: #eefbf4; padding: 16px; border-radius: 12px; margin-top: 20px; font-size: 22px; font-weight: bold; color: #008f5a; } /* Styles the total box */
+    .pay { background: #fff8e8; padding: 14px; border-radius: 12px; margin-top: 16px; } /* Styles payment info */
+    .note { background: #f6f1ff; padding: 14px; border-radius: 12px; margin-top: 16px; } /* Styles the explanation box */
+    .small { font-size: 14px; color: #555; } /* Styles small text */
+    a { color: #008f5a; font-weight: bold; } /* Styles links */
+  </style> <!-- Ends the page styles -->
+</head> <!-- Ends the page settings -->
+<body> <!-- Starts the visible page -->
+  <div class="box"> <!-- Starts the main card -->
+    <h1>🌎 Calculadora de pago internacional</h1> <!-- Shows the title -->
+    <p>Usa esta calculadora si pagarás desde el extranjero por <strong>Zelle o GoFundMe</strong>.</p> <!-- Explains when to use this calculator -->
+
+    <div class="note"> <!-- Starts the explanation box -->
+      <p><strong>Precio solidario internacional:</strong> cada charla regular cuesta <strong>$8 / €8</strong>.</p> <!-- Explains the base international price -->
+      <p class="small">Este monto considera comisiones de plataformas, costos de transferencia, conversión de moneda y fluctuación del tipo de cambio. Gracias por ayudarnos a mantener precios accesibles en Perú.</p> <!-- Explains the reason for the price -->
+    </div> <!-- Ends the explanation box -->
+
+    <h2>Elige tu moneda</h2> <!-- Shows the currency section -->
+    <label> <!-- Starts the currency row -->
+      <span>Moneda de pago</span> <!-- Shows currency label -->
+      <select id="moneda" onchange="calcular()"> <!-- Lets the user choose currency -->
+        <option value="$">Dólares USD ($)</option> <!-- Adds USD option -->
+        <option value="€">Euros EUR (€)</option> <!-- Adds EUR option -->
+      </select> <!-- Ends the currency selector -->
+    </label> <!-- Ends the currency row -->
+
+    <h2>Charlas regulares</h2> <!-- Shows the regular talks section -->
+    <label> <!-- Starts the regular talks row -->
+      <span>Charlas regulares — 8 c/u</span> <!-- Shows the regular talk price -->
+      <input type="number" id="regular" value="0" min="0" onchange="calcular()"> <!-- Lets the user choose the number of regular talks -->
+    </label> <!-- Ends the regular talks row -->
+
+    <h2>Eventos especiales</h2> <!-- Shows the special events section -->
+    <label> <!-- Starts the Brazil/Python row -->
+      <span>Masterclass 360°: De Perú a Brasil + Python desde cero — 18</span> <!-- Shows the Brazil/Python price -->
+      <input type="checkbox" id="brasilPython" onchange="calcular()"> <!-- Lets the user select the Brazil/Python event -->
+    </label> <!-- Ends the Brazil/Python row -->
+
+    <label> <!-- Starts the virtual workshop row -->
+      <span>Taller virtual: CV, becas, storytelling y emails fríos — 15</span> <!-- Shows the virtual workshop price -->
+      <input type="checkbox" id="tallerVirtual" onchange="calcular()"> <!-- Lets the user select the virtual workshop -->
+    </label> <!-- Ends the virtual workshop row -->
+
+    <label> <!-- Starts the in-person workshop row -->
+      <span>Taller presencial: CV, becas, storytelling y networking — 20</span> <!-- Shows the in-person workshop price -->
+      <input type="checkbox" id="tallerPresencial" onchange="calcular()"> <!-- Lets the user select the in-person workshop -->
+    </label> <!-- Ends the in-person workshop row -->
+
+    <div class="total" id="resultado">Total a pagar: $0.00</div> <!-- Shows the final total -->
+
+    <div class="pay"> <!-- Starts the payment info box -->
+      <p><strong>Medios de pago internacional:</strong></p> <!-- Shows payment options title -->
+      <p>💜 <strong>Zelle:</strong> menstruaccion.peru@gmail.com<br><span class="small">A nombre de Carla Martinez.</span></p> <!-- Shows Zelle info -->
+      <p>💚 <strong>GoFundMe:</strong> <a href="https://gofund.me/fafa69d23" target="_blank">https://gofund.me/fafa69d23</a></p> <!-- Shows GoFundMe link -->
+      <p class="small">Si estás en Europa u otro país, GoFundMe puede procesar tu pago en moneda local. Para hacerlo simple, usa el mismo monto numérico en tu moneda. Por ejemplo: $8 = €8.</p> <!-- Explains non-USD payments -->
+      <p class="small">Luego de pagar, vuelve al formulario y sube tu comprobante.</p> <!-- Gives the next step -->
+    </div> <!-- Ends the payment info box -->
+
+    <p class="small">¿Pagarás por Yape o BCP? Usa la <a href="index.html">calculadora de pago en soles</a>.</p> <!-- Links to soles calculator -->
+  </div> <!-- Ends the main card -->
+
+  <script> // Starts the calculator logic
+    function calcular() { // Creates the calculation function
+      let simbolo = document.getElementById("moneda").value; // Gets the selected currency symbol
+      let regular = Number(document.getElementById("regular").value) || 0; // Gets the number of regular talks
+      let total = regular * 8; // Calculates regular talks total
+      if (document.getElementById("brasilPython").checked) total += 18; // Adds Brazil/Python event if selected
+      if (document.getElementById("tallerVirtual").checked) total += 15; // Adds virtual workshop if selected
+      if (document.getElementById("tallerPresencial").checked) total += 20; // Adds in-person workshop if selected
+      document.getElementById("resultado").innerText = "Total a pagar: " + simbolo + total.toFixed(2); // Updates the total text
+    } // Ends the calculation function
+    calcular(); // Runs the calculation when the page loads
+  </script> <!-- Ends the calculator logic -->
+</body> <!-- Ends the visible page -->
+</html> <!-- Ends the HTML document -->
