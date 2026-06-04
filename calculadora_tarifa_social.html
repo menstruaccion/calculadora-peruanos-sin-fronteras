@@ -1,0 +1,75 @@
+<!DOCTYPE html> <!-- Defines this document as HTML -->
+<html lang="es"> <!-- Sets the page language to Spanish -->
+<head> <!-- Starts the page settings -->
+  <meta charset="UTF-8"> <!-- Allows accents and Spanish characters -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Makes the page mobile-friendly -->
+  <title>Tarifa social | Peruanos Sin Fronteras</title> <!-- Sets the browser tab title -->
+  <style> /* Starts the page styles */
+    body { font-family: Arial, sans-serif; background: #f7f3ff; margin: 0; padding: 20px; color: #222; } /* Styles the full page */
+    .box { max-width: 560px; margin: auto; background: white; padding: 24px; border-radius: 16px; box-shadow: 0 4px 14px rgba(0,0,0,0.10); } /* Styles the main card */
+    h1 { color: #5b2bbf; font-size: 26px; margin-bottom: 8px; } /* Styles the main title */
+    h2 { color: #d63384; font-size: 18px; margin-top: 24px; } /* Styles section titles */
+    p { line-height: 1.5; } /* Makes paragraph text easier to read */
+    label { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid #eee; } /* Styles each option row */
+    input[type="number"] { width: 75px; padding: 7px; font-size: 16px; } /* Styles number inputs */
+    input[type="checkbox"] { width: 20px; height: 20px; } /* Styles checkboxes */
+    .total { background: #f2ecff; padding: 16px; border-radius: 12px; margin-top: 20px; font-size: 22px; font-weight: bold; color: #5b2bbf; } /* Styles the total box */
+    .notice { background: #fff0f6; padding: 14px; border-radius: 12px; margin-top: 16px; border: 1px solid #ffd1e4; } /* Styles the social-rate notice box */
+    .pay { background: #fff8e8; padding: 14px; border-radius: 12px; margin-top: 16px; } /* Styles the payment box */
+    .small { font-size: 14px; color: #555; } /* Styles small helper text */
+    .button-link { display: inline-block; background: #5b2bbf; color: white; padding: 10px 14px; border-radius: 999px; text-decoration: none; font-weight: bold; margin-top: 8px; } /* Styles the WhatsApp button */
+    a { color: #5b2bbf; font-weight: bold; } /* Styles links */
+  </style> <!-- Ends the page styles -->
+</head> <!-- Ends the page settings -->
+<body> <!-- Starts the visible page -->
+  <div class="box"> <!-- Starts the main card -->
+    <h1>🤝 Calculadora de tarifa social</h1> <!-- Shows the title -->
+    <p>Usa esta calculadora solo si MenstruAcción ya aprobó tu <strong>tarifa social en soles</strong>.</p> <!-- Explains when to use this calculator -->
+
+    <div class="notice"> <!-- Starts the social-rate notice box -->
+      <p><strong>Plan mitad de precio por entrada:</strong></p> <!-- Shows the discount plan title -->
+      <p class="small">Esta tarifa aplica únicamente para estudiantes vigentes de colegios, institutos o universidades en Perú que nos escriban directamente por WhatsApp para evaluar su caso.</p> <!-- Explains the eligibility requirement -->
+      <a class="button-link" href="https://wa.link/q3w9iz" rel="noopener" target="_blank">📲 Te ayudamos!</a> <!-- Links to WhatsApp support -->
+    </div> <!-- Ends the social-rate notice box -->
+
+    <h2>Charlas regulares</h2> <!-- Shows the regular talks section -->
+    <label> <!-- Starts the regular talks row -->
+      <span>Charlas regulares — S/5 c/u</span> <!-- Shows the social price for regular talks -->
+      <input type="number" id="regular" value="0" min="0" onchange="calcular()" onkeyup="calcular()"> <!-- Lets the user choose the number of regular talks -->
+    </label> <!-- Ends the regular talks row -->
+
+    <h2>Eventos especiales virtuales</h2> <!-- Shows the special virtual events section -->
+    <label> <!-- Starts the Brazil/Python row -->
+      <span>Masterclass 360°: De Perú a Brasil + Python desde cero — S/12.50</span> <!-- Shows the social price for the Brazil/Python event -->
+      <input type="checkbox" id="brasilPython" onchange="calcular()"> <!-- Lets the user select the Brazil/Python event -->
+    </label> <!-- Ends the Brazil/Python row -->
+
+    <label> <!-- Starts the Postula con Impacto row -->
+      <span>Postula con Impacto: CV, Ensayos, Storytelling y Emails Fríos — S/10</span> <!-- Shows the social price for Postula con Impacto -->
+      <input type="checkbox" id="postulaImpacto" onchange="calcular()"> <!-- Lets the user select Postula con Impacto -->
+    </label> <!-- Ends the Postula con Impacto row -->
+
+    <div class="total" id="resultado">Total a pagar: S/0.00</div> <!-- Shows the final total -->
+
+    <div class="pay"> <!-- Starts the payment info box -->
+      <p><strong>Alternativas de pago sin comisión:</strong></p> <!-- Shows payment options title -->
+      <p>💗 <strong>Yape:</strong> 973 150 633<br><span class="small">A nombre de DAPHNE ARIANA HUIMAN PAREDES.</span></p> <!-- Shows Yape number -->
+      <p>💙 <strong>BCP:</strong><br>Soles: 19116756510066<br>CCI: 0021911675651006652</p> <!-- Shows BCP account details -->
+      <p class="small">Luego de pagar, vuelve al formulario y sube tu comprobante.</p> <!-- Gives the next step -->
+    </div> <!-- Ends the payment info box -->
+
+    <p class="small">Si todavía no has solicitado la tarifa social, escríbenos primero por <a href="https://wa.link/q3w9iz" rel="noopener" target="_blank">WhatsApp</a>.</p> <!-- Reminds users to request approval first -->
+  </div> <!-- Ends the main card -->
+
+  <script> // Starts the calculator logic
+    function calcular() { // Creates the calculation function
+      let regular = Number(document.getElementById("regular").value) || 0; // Gets the number of regular talks
+      let total = regular * 5; // Calculates the total for regular talks at half price
+      if (document.getElementById("brasilPython").checked) total += 12.5; // Adds the Masterclass 360° event at half price if selected
+      if (document.getElementById("postulaImpacto").checked) total += 10; // Adds Postula con Impacto at half price if selected
+      document.getElementById("resultado").innerText = "Total a pagar: S/" + total.toFixed(2); // Updates the total shown on the page
+    } // Ends the calculation function
+    calcular(); // Runs the calculator when the page loads
+  </script> <!-- Ends the calculator logic -->
+</body> <!-- Ends the visible page -->
+</html> <!-- Ends the HTML document -->
